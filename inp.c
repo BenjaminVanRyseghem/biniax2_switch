@@ -84,19 +84,19 @@ void inpUpdate()
 					case SDLK_ESCAPE : 
 						_Inp.keyB		= BNX_TRUE;
 						break;
-					case SDLK_KP8:
+					case SDLK_KP_8:
 					case SDLK_UP : 
 						_Inp.keyUp		= BNX_TRUE;
 						break;
-					case SDLK_KP2:
+					case SDLK_KP_2:
 					case SDLK_DOWN : 
 						_Inp.keyDown	= BNX_TRUE;
 						break;
-					case SDLK_KP4:
+					case SDLK_KP_4:
 					case SDLK_LEFT : 
 						_Inp.keyLeft	= BNX_TRUE;
 						break;
-					case SDLK_KP6:
+					case SDLK_KP_6:
 					case SDLK_RIGHT : 
 						_Inp.keyRight	= BNX_TRUE;
 						break;

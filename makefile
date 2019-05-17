@@ -7,41 +7,41 @@
 #$(error "Please set DEVKITPRO in your environment. export DEVKITPRO=<path to>DEVKITPRO")
 #endif
 
-#include $(DEVKITPRO)
-
 INCLUDES_OS := \
 		-ISDL_port \
 		-I$(DEVKITPRO)/portlibs/switch/include/SDL2 \
 		-I$(DEVKITPRO)/portlibs/switch/include \
 		-I$(DEVKITPRO)/libnx/include
 
-CFLAGS := -W -WALL -fsingle-precision-constant -fno-rtti
-CXXFLAGS := -c -O2 $(CFLAGS)
+CFLAGS := -W -fsingle-precision-constant
+CXXFLAGS := -c -O2 -fno-rtti $(CFLAGS)
 
 PREFIX := $(DEVKITPRO)/devkitA64/bin/aarch64-none-elf-
 CC := ${PREFIX}gcc
 CXX := ${PREFIX}g++
 LD := ${PREFIX}g++
-FILES:= biniax.c hof.c desktop/cfg.c desktop/gfx.c desktop/snd.c desktop/inp.c desktop/sys.c
+FILES:= biniax.c hof.c cfg.c gfx.c snd.c inp.c sys.c
 INCLUDES := -I . -I./SDLPort -I./cml $(INCLUDES_OS)
 LINKTO := -specs=$(DEVKITPRO)/libnx/switch.specs -lSDL2 -lSDL2_mixer -lSDL2_image -L$(DEVKITPRO)/libnx/lib -L$(DEVKITPRO)/portlibs/switch/lib
 AUTO := `$(DEVKITPRO)/portlibs/switch/bin/sdl2-config --libs --cflags`
 TARGET := biniax2
-#
-#ALL_OBJS:
-#	$(CC) $(AUTO) $(FILES) $(INCLUDES) -o $(TARGET) $(LINKTO)
 
-ALL_OBJS := $(addsuffix .o, $(ALL_FILES))
+foo:
+	$(CC) $(AUTO) $(FILES) $(INCLUDES) -o $(TARGET) $(LINKTO)
+
 
 $(EXE) : $(ALL_OBJS)
 	$(LD) $^ $(LINKTO) -o $@
 	$(STRIP) $(EXE)
 
-%.o : %.cpp
-	$(CXX) $(CXXFLAGS) $< -o $@
+%.cpp.o : %.cpp
+	$(CXX) $(AUTO) $(CXXFLAGS) $< -o $@
 
-%.o : %.c
-	$(CC) $(CFLAGS) $< -o $@
+%.c.o : %.c
+	$(CC) $(AUTO) $(CFLAGS) $< -o $@
+
+ALL_FILES := $(FILES)
+ALL_OBJS := $(addsuffix .o, $(ALL_FILES))
 
 all: $(ALL_OBJS) $(TARGET).nro
 

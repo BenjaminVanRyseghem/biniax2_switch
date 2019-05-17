@@ -31,7 +31,7 @@ For complete product license refer to LICENSE.TXT file
 INCLUDES
 ******************************************************************************/
 
-//#include "types.h"
+#include "types.h"
 
 /******************************************************************************
 DEFINITIONS
