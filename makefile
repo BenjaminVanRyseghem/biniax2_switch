@@ -26,22 +26,8 @@ LINKTO := -specs=$(DEVKITPRO)/libnx/switch.specs -lSDL2 -lSDL2_mixer -lSDL2_imag
 AUTO := `$(DEVKITPRO)/portlibs/switch/bin/sdl2-config --libs --cflags`
 TARGET := biniax2
 
-foo:
+ALL_OBJS:
 	$(CC) $(AUTO) $(FILES) $(INCLUDES) -o $(TARGET) $(LINKTO)
-
-
-$(EXE) : $(ALL_OBJS)
-	$(LD) $^ $(LINKTO) -o $@
-	$(STRIP) $(EXE)
-
-%.cpp.o : %.cpp
-	$(CXX) $(AUTO) $(CXXFLAGS) $< -o $@
-
-%.c.o : %.c
-	$(CC) $(AUTO) $(CFLAGS) $< -o $@
-
-ALL_FILES := $(FILES)
-ALL_OBJS := $(addsuffix .o, $(ALL_FILES))
 
 all: $(ALL_OBJS) $(TARGET).nro
 
